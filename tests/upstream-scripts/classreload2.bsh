@@ -1,0 +1,23 @@
+#!/bin/java bsh.Interpreter
+
+source("TestHarness.bsh");
+source("Assert.bsh");
+
+// Fixed by #698: an inner class extending its own enclosing class is
+// generated after the enclosing class, so it resolves on first definition.
+class A { class B extends A {} }
+assertSame("A.class is A$B.class's superclass", A.class, A$B.class.getSuperclass());
+
+class A {}
+class A { class B extends A {} }
+
+assertSame("A.class is A$B.class's superclass after redefinition", A.class, A$B.class.getSuperclass());
+
+class A {
+    static A INSTANCE = new A();
+}
+
+// Works because BSHType listens for class reload events #699
+assertSame("A.class is A.class reloaded", A.class, A.INSTANCE.getClass());
+
+complete();

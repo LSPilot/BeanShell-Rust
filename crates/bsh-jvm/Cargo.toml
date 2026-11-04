@@ -1,0 +1,10 @@
+[package]
+name = "bsh-jvm"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Embedded JVM access and Java reflection bridge"
+repository.workspace = true
+
+[dependencies]

@@ -1,0 +1,29 @@
+#!/bin/java bsh.Interpreter
+
+source("TestHarness.bsh");
+source("Assert.bsh");
+
+assertTrue( FooR == void );
+
+class FooR {
+    public int get() { return 42; }
+}
+assertEquals(42, new FooR().get());
+
+class FooR {
+    public int get() { return 43; }
+}
+assertEquals(43, new FooR().get());
+
+class BarR extends FooR { }
+
+assertEquals(43, new BarR().get());
+
+class FooR {
+    public int get() { return 44; }
+}
+assertEquals(44, new FooR().get());
+assertEquals(44, new BarR().get());
+assertSame(FooR.class, BarR.class.getSuperclass());
+
+complete();

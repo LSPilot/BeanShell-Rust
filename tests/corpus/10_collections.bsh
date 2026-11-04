@@ -1,0 +1,20 @@
+p( x ) { this.interpreter.println( x ); }
+
+List l = new ArrayList();
+l.add("a");
+l.add("b");
+p(l.size());
+p(l.get(1));
+p(l);
+Map m = new HashMap();
+m.put("k", 1);
+p(m.get("k"));
+p(m.containsKey("k"));
+p(m.size());
+StringBuilder sb = new StringBuilder();
+sb.append("x").append(1);
+p(sb.toString());
+p(Math.max(3, 9));
+p(Math.abs(-4));
+p(Math.sqrt(16));
+this.interpreter.println("sys");

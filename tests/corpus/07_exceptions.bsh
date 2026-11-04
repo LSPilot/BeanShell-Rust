@@ -1,0 +1,10 @@
+p( x ) { this.interpreter.println( x ); }
+
+try { throw new RuntimeException("boom"); }
+catch (IllegalArgumentException e) { p("wrong"); }
+catch (RuntimeException e) { p(e.getMessage()); }
+finally { p("finally"); }
+try { int x = 1 / 0; } catch (e) { p("caught"); }
+done() { try { return 1; } finally { p("cleanup"); } }
+p(done());
+try { throw new Exception("x"); } catch (Exception e) { p("typed"); }

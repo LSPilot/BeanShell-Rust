@@ -1,0 +1,11 @@
+p( x ) { this.interpreter.println( x ); }
+
+int a = 1;
+{ int a = 2; p(a); }
+p(a);
+for (int i = 0; i < 1; i++) { }
+int i = 99;
+p(i);
+foo() { x = 5; return x; }
+p(foo());
+p(x);

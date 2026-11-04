@@ -1,0 +1,9 @@
+p( x ) { this.interpreter.println( x ); }
+
+p(new java.math.BigInteger("12").add(new java.math.BigInteger("30")));
+p(new java.math.BigInteger("2").pow(10));
+p(java.math.BigInteger.valueOf(7).multiply(java.math.BigInteger.valueOf(6)));
+p(new java.awt.Point(3, 4).x);
+p(java.lang.System.getProperty("java.version").length() > 0);
+p(new java.io.File("/tmp").getName());
+try { new java.math.BigInteger("nope"); } catch (java.lang.NumberFormatException e) { p("caught"); }

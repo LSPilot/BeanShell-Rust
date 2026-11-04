@@ -1,0 +1,18 @@
+p( x ) { this.interpreter.println( x ); }
+
+int sum = 0;
+for (int i = 1; i <= 4; i++) sum += i;
+p(sum);
+int j = 0;
+while (j < 3) j++;
+p(j);
+do { j--; } while (j > 0);
+p(j);
+for (int x : new int[] {4, 5}) p(x);
+int k = 2;
+switch (k) { case 1: p("one"); break; case 2: p("two"); break; default: p("other"); }
+switch ("b") { case "a": p("A"); break; case "b": p("B"); break; }
+outer: for (int a = 0; a < 3; a++) { for (int b = 0; b < 3; b++) { if (b == 1) break outer; p(a + ":" + b); } }
+if (true) p("t"); else p("f");
+int m = 3;
+p(m > 2 ? "big" : "small");

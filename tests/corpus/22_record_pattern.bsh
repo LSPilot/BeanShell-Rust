@@ -1,0 +1,9 @@
+record Point(int x, int y) {}
+p = new Point(1, 2);
+switch (p) {
+    case Point(int x, int y) -> {
+        print(x);
+        print(y);
+    }
+    default -> print("no");
+}

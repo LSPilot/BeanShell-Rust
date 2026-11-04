@@ -1,0 +1,29 @@
+p( x ) { this.interpreter.println( x ); }
+
+class Point {
+    int x;
+    int y;
+    Point(int x, int y) { this.x = x; this.y = y; }
+    int sum() { return x + y; }
+    String toString() { return "Point(" + x + "," + y + ")"; }
+}
+Point p = new Point(2, 3);
+p(p.sum());
+p(p.toString());
+p(p.x);
+p.x = 10;
+p(p.sum());
+class Point3 extends Point {
+    int z;
+    Point3(int x, int y, int z) { super(x, y); this.z = z; }
+    int sum() { return super.sum() + z; }
+}
+Point3 q = new Point3(1, 2, 3);
+p(q.sum());
+p(q instanceof Point);
+p(q instanceof Point3);
+p(q instanceof String);
+class Counter { int n; void inc() { n++; } int get() { return n; } }
+Counter c = new Counter();
+c.inc(); c.inc();
+p(c.get());

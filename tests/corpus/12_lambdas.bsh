@@ -1,0 +1,5 @@
+p( x ) { this.interpreter.println( x ); }
+
+// Lambdas crossing into Java APIs (the call happens inside Java).
+p(java.util.Optional.of("y").map(v -> v + "!").get());
+p(java.util.Optional.of(3).map(n -> (int) n * 2).get());

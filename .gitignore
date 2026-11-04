@@ -1,0 +1,18 @@
+/target/
+**/target/
+**/*.rs.bk
+**/java-classes/
+.idea/
+.vscode/
+.DS_Store
+*.iml
+/dist/
+
+# Android AAR build
+/android/.gradle/
+/android/build/
+/android/bsh-rs/build/
+/android/bsh-rs/src/main/jniLibs/
+/android/local.properties
+/android/app/build/
+/android/.kotlin/

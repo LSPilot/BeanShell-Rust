@@ -1,0 +1,17 @@
+[package]
+name = "bsh-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Command line interface for the Rust BeanShell interpreter"
+repository.workspace = true
+
+[dependencies]
+bsh-syntax = { workspace = true }
+bsh-runtime = { workspace = true }
+bsh-jvm = { workspace = true }
+
+[[bin]]
+name = "bsh"
+path = "src/main.rs"

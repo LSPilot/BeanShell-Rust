@@ -1,0 +1,13 @@
+# Local Android cross-compilation defaults.
+#
+# CI builds Android artifacts with cargo-ndk, which supplies its own linker and
+# --target flags, so this section only affects local builds. The linker wrapper
+# needs ANDROID_NDK_HOME (see tools/android-linker.sh).
+[target.aarch64-linux-android]
+linker = "tools/android-linker.sh"
+rustflags = [
+    "-C", "link-arg=-Wl,-z,max-page-size=16384",
+    "-C", "link-arg=-Wl,-z,common-page-size=16384",
+    "-C", "link-arg=-Wl,--icf=all",
+    "-C", "force-unwind-tables=no",
+]

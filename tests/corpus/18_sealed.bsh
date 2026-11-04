@@ -1,0 +1,4 @@
+sealed interface Shape permits Circle {}
+class Circle implements Shape {}
+c = new Circle();
+print(c instanceof Shape);

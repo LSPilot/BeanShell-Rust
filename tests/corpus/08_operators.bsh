@@ -1,0 +1,23 @@
+p( x ) { this.interpreter.println( x ); }
+
+p(true && false);
+p(true || false);
+p(!true);
+p(true & false);
+p(true | false);
+p(1 == 1);
+p(1 != 2);
+p("a" == "a");
+p(null == null);
+int i = 5; i += 2; p(i);
+i -= 1; p(i);
+i *= 3; p(i);
+i /= 2; p(i);
+i %= 4; p(i);
+i <<= 2; p(i);
+i >>= 1; p(i);
+int j = 1; p(j++); p(j); p(++j); p(j--); p(j);
+Object o = null;
+p(o == null);
+p("x" + null);
+p(null + "x");

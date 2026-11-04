@@ -1,0 +1,4 @@
+o = "abc";
+if (o instanceof String s) {
+    print(s);
+}

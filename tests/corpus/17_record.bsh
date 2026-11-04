@@ -1,0 +1,6 @@
+record Point(int x, int y) {}
+a = new Point(1, 2);
+b = new Point(1, 2);
+print(a.toString());
+print(a.x());
+print(a.equals(b));

@@ -1,0 +1,4 @@
+var x = 1;
+var s = "abc";
+print(x);
+print(s);

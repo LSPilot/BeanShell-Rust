@@ -1,0 +1,22 @@
+[workspace]
+resolver = "2"
+members = ["crates/bsh-syntax", "crates/bsh-jvm", "crates/bsh-runtime", "crates/bsh-cli", "crates/bsh-rs"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+rust-version = "1.75"
+repository = "https://github.com/Lspilot/BeanShell-Rust"
+
+[workspace.dependencies]
+bsh-syntax = { path = "crates/bsh-syntax" }
+bsh-jvm = { path = "crates/bsh-jvm" }
+bsh-runtime = { path = "crates/bsh-runtime" }
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+strip = "symbols"
+panic = "abort"

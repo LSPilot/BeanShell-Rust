@@ -1,0 +1,10 @@
+o = "abc";
+switch (o) {
+    case String s -> print(s);
+    default -> print("other");
+}
+n = switch (o) {
+    case String s -> s.length();
+    default -> 0;
+};
+print(n);

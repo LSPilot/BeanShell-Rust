@@ -1,0 +1,16 @@
+p( x ) { this.interpreter.println( x ); }
+
+int[] a = new int[3];
+a[0] = 7;
+p(a[0]);
+p(a.length);
+int[] b = {1, 2, 3};
+p(b[2]);
+p(b.length);
+String[][] m = new String[2][2];
+m[0][0] = "x";
+p(m[0][0]);
+Object[] objs = new Object[] {1, "two"};
+p(objs[1]);
+p(int[].class != null);
+p(new int[] {1,2,3}.length);

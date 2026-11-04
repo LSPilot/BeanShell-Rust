@@ -1,0 +1,15 @@
+p( x ) { this.interpreter.println( x ); }
+
+int fact(int n) { if (n <= 1) return 1; return n * fact(n - 1); }
+p(fact(5));
+add(a, b) { return a + b; }
+p(add(2, 3));
+int base = 10;
+int addBase(int x) { return x + base; }
+p(addBase(5));
+sum(int... xs) { int t = 0; for (int x : xs) t += x; return t; }
+p(sum(1, 2, 3, 4));
+void nothing() { }
+p(nothing());
+String greet(String name) { return "hi " + name; }
+p(greet("bob"));

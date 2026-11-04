@@ -1,0 +1,10 @@
+[package]
+name = "bsh-syntax"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "BeanShell lexer, parser and AST"
+repository.workspace = true
+
+[dependencies]

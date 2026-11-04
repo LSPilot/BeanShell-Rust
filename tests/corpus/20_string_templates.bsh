@@ -1,0 +1,5 @@
+name = "world";
+n = 3;
+print("hello $name ${n + 1}");
+print("escaped \$name");
+print("price $5");

@@ -1,0 +1,280 @@
+#!/bin/java bsh.Interpreter
+
+source("TestHarness.bsh");
+source("Assert.bsh");
+
+f=(float) 5;
+assertEquals(5f, f, 1);
+assertEquals(0i, (int) 0.5);
+
+a=0.3;
+assertEquals(0i, (int) a);
+
+d=(double) +1;
+assertEquals(1.0d, d, 1);
+
+// this is ok of course
+String s = null;
+assertNull(s);
+// but this should be as well
+String s2 = (String) null;
+assertNull(s2);
+assertNull((Object) null);
+
+// null cannot be cast to a primitive type
+assert(isEvalError("Cannot cast null value to primitive type byte", "(byte) null;"));
+assert(isEvalError("Cannot cast null value to primitive type short", "(short) null;"));
+assert(isEvalError("Cannot cast null value to primitive type int", "(int) null;"));
+assert(isEvalError("Cannot cast null value to primitive type long", "(long) null;"));
+assert(isEvalError("Cannot cast null value to primitive type float", "(float) null;"));
+assert(isEvalError("Cannot cast null value to primitive type double", "(double) null;"));
+assert(isEvalError("Cannot cast null value to primitive type boolean", "(boolean) null;"));
+assert(isEvalError("Cannot cast null value to primitive type char", "(char) null;"));
+
+int x = (int) 'a';
+assertEquals(97i, x);
+
+// can't cast void to anything
+assert( isEvalError("Cannot cast void value to int", "(int) xyz"));
+assert( isEvalError("Cannot cast void value to Object", "(Object) xyz"));
+
+// cast primitives to object types get boxed
+assertThat((Object) 5o, instanceOf(Byte.class));
+assertThat((Object) 5s, instanceOf(Short.class));
+assertThat((Object) 5i, instanceOf(Integer.class));
+assertThat((Object) 5l, instanceOf(Long.class));
+assertThat((Object) 5f, instanceOf(Float.class));
+assertThat((Object) 5d, instanceOf(Double.class));
+assertThat((Object) '5', instanceOf(Character.class));
+assertThat((Object) true, instanceOf(Boolean.class));
+// cast boxed types to primitives
+assertEquals('a', (char) Character.valueOf('a'));
+assertEquals(1o, (byte) Byte.valueOf(1o));
+assertEquals(2s, (short) Short.valueOf(2s));
+assertEquals(3i, (int) Integer.valueOf(3i));
+assertEquals(4l, (long) Long.valueOf(4l));
+assertEquals(5.0f, (float) Float.valueOf(5f), 1);
+assertEquals(6.0d, (double) Double.valueOf(6d), 1);
+assertEquals(true, (boolean) Boolean.TRUE);
+
+// boolean cannot be cast to numbers
+assert(isEvalError("Cannot cast", "(char) false;"));
+assert(isEvalError("Cannot cast", "(byte) false;"));
+assert(isEvalError("Cannot cast", "(short) false;"));
+assert(isEvalError("Cannot cast", "(int) false;"));
+assert(isEvalError("Cannot cast", "(long) false;"));
+assert(isEvalError("Cannot cast", "(float) false;"));
+assert(isEvalError("Cannot cast", "(double) false;"));
+assert(isEvalError("Cannot cast", "(char) true;"));
+assert(isEvalError("Cannot cast", "(byte) true;"));
+assert(isEvalError("Cannot cast", "(short) true;"));
+assert(isEvalError("Cannot cast", "(int) true;"));
+assert(isEvalError("Cannot cast", "(long) true;"));
+assert(isEvalError("Cannot cast", "(float) true;"));
+assert(isEvalError("Cannot cast", "(double) true;"));
+
+// string cannot be cast to number
+assert(isEvalError("Cannot cast", "(char) \"97\";"));
+assert(isEvalError("Cannot cast", "(int) \"1.0\";"));
+assert(isEvalError("Cannot cast", "(byte) \"3\";"));
+assert(isEvalError("Cannot cast", "(short) \"2\";"));
+assert(isEvalError("Cannot cast", "(int) \"1.0\";"));
+assert(isEvalError("Cannot cast", "(long) \"0\";"));
+assert(isEvalError("Cannot cast", "(float) \"-1\";"));
+assert(isEvalError("Cannot cast", "(double) \"-2.0\";"));
+
+// cast to boolean
+assertEquals(false, (boolean) false);
+assert(isEvalError("Cannot cast", "(boolean) '\\000';"));
+assert(isEvalError("Cannot cast", "(boolean) 0o;"));
+assert(isEvalError("Cannot cast", "(boolean) 0s;"));
+assert(isEvalError("Cannot cast", "(boolean) 0i;"));
+assert(isEvalError("Cannot cast", "(boolean) 0l;"));
+assert(isEvalError("Cannot cast", "(boolean) 0.0f;"));
+assert(isEvalError("Cannot cast", "(boolean) 0.0d;"));
+assert(isEvalError("Cannot cast", "(boolean) \"\";"));
+assertEquals(true, (boolean) true);
+assert(isEvalError("Cannot cast", "(boolean) ' ';"));
+assert(isEvalError("Cannot cast", "(boolean) 3o;"));
+assert(isEvalError("Cannot cast", "(boolean) 2s;"));
+assert(isEvalError("Cannot cast", "(boolean) 1i;"));
+assert(isEvalError("Cannot cast", "(boolean) -1l;"));
+assert(isEvalError("Cannot cast", "(boolean) -2.0f;"));
+assert(isEvalError("Cannot cast", "(boolean) -3.0d;"));
+assert(isEvalError("Cannot cast", "(boolean) \"not empty\";"));
+assert(isEvalError("Cannot cast", "(boolean) new Object();"));
+assert(isEvalError("Cannot cast", "(boolean) Class.class;"));
+
+// typed variable assignment
+byte b;
+assertEquals(0o, b);
+assert(isEvalError("Cannot assign", "b = null;"));
+assertEquals(0o, b = '\000');
+assert(isEvalError("Cannot assign", "b = false;"));
+assert(isEvalError("Cannot assign", "b = true;"));
+assert(isEvalError("Cannot assign", "b = \"123\";"));
+Byte B;
+assertNull(B);
+assertNull(B = null);
+assertEquals(0o, B = '\000');
+assert(isEvalError("Cannot assign", "B = false;"));
+assert(isEvalError("Cannot assign", "B = true;"));
+assert(isEvalError("Cannot assign", "B = \"123\";"));
+short ss;
+assertEquals(0s, ss);
+assert(isEvalError("Cannot assign", "ss = null;"));
+assertEquals(0s, ss = '\000');
+assert(isEvalError("Cannot assign", "ss = false;"));
+assert(isEvalError("Cannot assign", "ss = true;"));
+assert(isEvalError("Cannot assign", "ss = \"123\";"));
+Short S;
+assertNull(S);
+assertNull(S = null);
+assertEquals(0s, S = '\000');
+assert(isEvalError("Cannot assign", "S = false;"));
+assert(isEvalError("Cannot assign", "S = true;"));
+assert(isEvalError("Cannot assign", "S = \"123\";"));
+int i;
+assertEquals(0i, i);
+assert(isEvalError("Cannot assign", "i = null;"));
+assertEquals(0i, i = '\000');
+assert(isEvalError("Cannot assign", "i = false;"));
+assert(isEvalError("Cannot assign", "i = true;"));
+assert(isEvalError("Cannot assign", "i = \"123\";"));
+Integer I;
+assertNull(I);
+assertNull(I = null);
+assertEquals(0i, I = '\000');
+assert(isEvalError("Cannot assign", "I = false;"));
+assert(isEvalError("Cannot assign", "I = true;"));
+assert(isEvalError("Cannot assign", "I = \"123\";"));
+long l;
+assertEquals(0l, l);
+assert(isEvalError("Cannot assign", "l = null;"));
+assertEquals(0l, l = '\000');
+assert(isEvalError("Cannot assign", "l = false;"));
+assert(isEvalError("Cannot assign", "l = true;"));
+assert(isEvalError("Cannot assign", "l = \"123\";"));
+Long L;
+assertNull(L);
+assertNull(L = null);
+assertEquals(0l, L = '\000');
+assert(isEvalError("Cannot assign", "L = false;"));
+assert(isEvalError("Cannot assign", "L = true;"));
+assert(isEvalError("Cannot assign", "L = \"123\";"));
+float f;
+assertEquals(0.0f, f, 1);
+assert(isEvalError("Cannot assign", "f = null;"));
+assertEquals(0.0f, f = '\000', 1);
+assert(isEvalError("Cannot assign", "f = false;"));
+assert(isEvalError("Cannot assign", "f = true;"));
+assert(isEvalError("Cannot assign", "f = \"123\";"));
+Float F;
+assertNull(F);
+assertNull(F = null);
+assertEquals(0.0f, F = '\000', 1);
+assert(isEvalError("Cannot assign", "F = false;"));
+assert(isEvalError("Cannot assign", "F = true;"));
+assert(isEvalError("Cannot assign", "F = \"123\";"));
+double d;
+assertEquals(0.0d, d, 1);
+assert(isEvalError("Cannot assign", "d = null;"));
+assertEquals(0.0d, d = '\000', 1);
+assert(isEvalError("Cannot assign", "d = false;"));
+assert(isEvalError("Cannot assign", "d = true;"));
+assert(isEvalError("Cannot assign", "d = \"123\";"));
+Double D;
+assertNull(D);
+assertNull(D = null);
+assertEquals(0.0d, D = '\000', 1);
+assert(isEvalError("Cannot assign", "D = false;"));
+assert(isEvalError("Cannot assign", "D = true;"));
+assert(isEvalError("Cannot assign", "D = \"123\";"));
+boolean bb;
+assertFalse(bb);
+assert(isEvalError("Cannot assign", "bb = null;"));
+assert(isEvalError("Cannot assign", "bb = 0;"));
+assert(isEvalError("Cannot assign", "bb = \"\";"));
+assert(isEvalError("Cannot assign", "bb = '\\000';"));
+assertFalse(bb = false);
+assert(isEvalError("Cannot assign", "bb = Boolean.TYPE;"));
+assert(isEvalError("Cannot assign", "bb = 123;"));
+assert(isEvalError("Cannot assign", "bb = \"tick\";"));
+assert(isEvalError("Cannot assign", "bb = 'a';"));
+assertTrue(bb = true);
+Boolean BB;
+assertNull(BB);
+assertNull(BB = null);
+assert(isEvalError("Cannot assign", "BB = 0;"));
+assert(isEvalError("Cannot assign", "BB = \"\";"));
+assert(isEvalError("Cannot assign", "BB = '\\000';"));
+assertFalse(BB = false);
+assert(isEvalError("Cannot assign", "BB = Boolean.class;"));
+assert(isEvalError("Cannot assign", "BB = 123;"));
+assert(isEvalError("Cannot assign", "BB = \"tick\";"));
+assert(isEvalError("Cannot assign", "BB = 'a';"));
+assertTrue(BB = true);
+
+// can't cast non parseable strings to number
+assert( isEvalError('Cannot cast String with value "foo" to int', '(int) "foo"'));
+assert( isEvalError('Cannot cast String with value "" to short', '(short) ""'));
+assert( isEvalError('Cannot cast String with value "foo" to Integer', '(Integer) "foo";'));
+
+// cast error throws ClassCastException which can be caught
+try {
+    i=(Integer) "foo";
+} catch ( ArithmeticException e0 ) {
+    assert(false); // just checking
+} catch ( ClassCastException e ) {
+    flag();
+}
+assertEquals(1, flag());
+
+// Casting between numeric reference types works
+refObj = (Number) Double.valueOf(1);
+assertThat(refObj, instanceOf(Number.class));
+assertThat(refObj, instanceOf(Double.class));
+assertEquals(refObj, 1.0);
+
+refObj = Double.valueOf(1);
+assertThat(refObj, instanceOf(Number.class));
+assertThat(refObj, instanceOf(Double.class));
+assertEquals(refObj, 1.0);
+
+Number refObj1 = (Number) Double.valueOf(1);
+assertThat(refObj1, instanceOf(Number.class));
+assertThat(refObj1, instanceOf(Double.class));
+assertEquals(refObj1, 1.0);
+
+Number refObj2 = Double.valueOf(1);
+assertThat(refObj2, instanceOf(Number.class));
+assertThat(refObj2, instanceOf(Double.class));
+assertEquals(refObj2, 1.0);
+
+Double refObj3 = (Double) null;
+assertEquals(refObj3, null);
+
+assert(isEvalError("Cannot cast", "Double refObject4 = (Double) Boolean.TRUE;"));
+
+// Issue #844: an explicit narrowing cast truncates out-of-range values per
+// JLS 5.1.3, rather than throwing, just like Java's (short)/(byte)/etc do.
+assertEquals(0s, (short) -2147483648L);
+assertEquals(44o, (byte) 300);
+// non-truncating explicit cast is unaffected
+assertEquals(5o, (byte) 5);
+
+// a typed declaration without an explicit cast is a different code path
+// and must still range-check rather than truncate
+assert( isEvalError("cannot assign number 300 to type byte", "byte noCastByte = 300;"));
+
+// strict-Java typed declarations already truncate on their own, unrelated,
+// code path -- confirm this fix didn't change that behavior either way
+setStrictJava(true);
+byte strictByte = 300;
+assertEquals(44o, strictByte);
+setStrictJava(false);
+
+// object-type casts still go through the untouched Types.castObject path
+assertThat((Object) "hello", instanceOf(String.class));
+
+complete();
