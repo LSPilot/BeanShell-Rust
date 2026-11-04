@@ -95,7 +95,7 @@ jobs:
           cd android
           ./gradlew :bsh-rs:assembleRelease
           mkdir -p ../dist
-          cp bsh-rs/build/outputs/aar/bsh-rs-release.aar "../dist/bsh-rs-$VERSION.aar"
+          cp bsh-rs/build/outputs/aar/bsh-rs-release.aar "../dist/bsh-rs-android-$VERSION.aar"
 
       - name: Build demo APK
         run: |

@@ -128,7 +128,7 @@ Android artifacts are published as an AAR built by AGP, bundling the JNI
 libraries for `arm64-v8a`, `armeabi-v7a` and `x86_64`:
 
 ```text
-bsh-rs-<version>.aar
+bsh-rs-android-<version>.aar
   AndroidManifest.xml
   classes.jar
   R.txt
@@ -138,7 +138,7 @@ bsh-rs-<version>.aar
   jni/x86_64/libbsh_rs.so
 ```
 
-Consume it from Gradle with `implementation(files("libs/bsh-rs.aar"))`.
+Consume it from Gradle with `implementation(files("libs/bsh-rs-android.aar"))`.
 The library exports JNI entry points named `Java_me_yun_lspilot_bsh_Native_*`.
 
 The AAR is assembled from `android/`, a small AGP library module that packages

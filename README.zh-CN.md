@@ -125,7 +125,7 @@ Android 产物发布为 AGP 构建的 AAR，内含 `arm64-v8a`、`armeabi-v7a`�
 三个 ABI 的 JNI 库：
 
 ```text
-bsh-rs-<version>.aar
+bsh-rs-android-<version>.aar
   AndroidManifest.xml
   classes.jar
   R.txt
@@ -135,7 +135,7 @@ bsh-rs-<version>.aar
   jni/x86_64/libbsh_rs.so
 ```
 
-Gradle 中使用 `implementation(files("libs/bsh-rs.aar"))` 引用。
+Gradle 中使用 `implementation(files("libs/bsh-rs-android.aar"))` 引用。
 库导出形如 `Java_me_yun_lspilot_bsh_Native_*` 的 JNI 入口。
 
 AAR 由 `android/` 下的 AGP library 模块打包，该模块只负责把预编译的
