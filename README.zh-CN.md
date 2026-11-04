@@ -205,6 +205,7 @@ AAR 同时携带 `proguard.txt`，避免混淆后 native 方法名失配。
 
 ## 贡献
 
+构建、测试与提交流程见 [CONTRIBUTING.zh-CN.md](CONTRIBUTING.zh-CN.md)。
 欢迎提交 issue 与 pull request。提交前请运行 `cargo fmt` 与
 `cargo test --workspace`；CI 会检查格式、以 release 模式构建，并在 Linux 与
 macOS 上运行完整测试。

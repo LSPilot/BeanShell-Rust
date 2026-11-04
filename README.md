@@ -211,6 +211,7 @@ survive shrinking.
 
 ## Contributing
 
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the build, test and review workflow.
 Issues and pull requests are welcome. Please run `cargo fmt` and
 `cargo test --workspace` before opening a pull request; CI checks formatting,
 builds in release mode and runs the full test suite on Linux and macOS.
